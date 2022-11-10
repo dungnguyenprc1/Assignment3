@@ -29,6 +29,7 @@ export const TextResult = styled.Text`
 `;
 export const FooterContainer = styled.View`
   flex: 0.25;
-  background-color: '#F1f1f1';
+  /* margin-top: 114px; */
+  background-color: #f1f1f1;
   align-items: center;
 `;
