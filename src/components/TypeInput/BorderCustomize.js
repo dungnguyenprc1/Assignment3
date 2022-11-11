@@ -2,66 +2,70 @@ import {View, Text, StyleSheet} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import React, {useState} from 'react';
 import PrimaryInput from './PrimaryInput';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-// import FormInput from '../FormInput/FormInput';
+import {useDispatch, useSelector} from 'react-redux';
+
+import {SET_BUTTON} from '../../redux/slice/buttonSlice';
 
 DropDownPicker.setListMode('SCROLLVIEW');
-export default function BorderCustomize() {
+export default function BorderCustomize({value, onChangeText}) {
+  const dispatch = useDispatch();
   const [openFirst, setOpenFirst] = useState(false);
-  const [isBorder, setIsBorder] = useState(true);
-  const [itemsBorder, setItemsBorder] = useState([
-    {label: 'Yes', value: true},
-    {label: 'No', value: false},
+  const [isBorder, setIsBorder] = useState(
+    useSelector(state => state.button.isBorder),
+  );
+  const [itemsBorder] = useState([
+    {label: 'Yes', value: 'true'},
+    {label: 'No', value: 'false'},
   ]);
 
   const [openSecond, setOpenSecond] = useState(false);
 
-  const [typeBorder, setTypeBorder] = useState('dash');
-  const [itemsTypeBorder, setItemsTypeBorder] = useState([
+  const [borderType, setBoderType] = useState(
+    useSelector(state => state.button.borderType),
+  );
+  console.log('borderType', borderType);
+  const [itemsTypeBorder] = useState([
     {label: 'Solid', value: 'solid'},
-    {label: 'Dash', value: 'dash'},
+    {label: 'Dash', value: 'dashed'},
   ]);
 
-  const handleIsBorder = async () => {
-    try {
-      await AsyncStorage.setItem('isBorder1', isBorder.toString());
-      console.log('123', await AsyncStorage.getItem('isBorder1'));
-    } catch (err) {
-      console.log(err);
-    }
+  const handleData = (name, values) => {
+    dispatch(SET_BUTTON({name, values}));
   };
-  console.log(isBorder);
   return (
     <View>
       <View style={{flex: 1, flexDirection: 'row'}}>
         <View style={{flex: 0.4}}>
           <DropDownPicker
+            onChangeValue={() => handleData('isBorder', isBorder)}
             dropDownDirection="TOP"
-            onChangeValue={handleIsBorder}
             style={styles.dropdown}
             open={openFirst}
             value={isBorder}
             items={itemsBorder}
             setOpen={setOpenFirst}
             setValue={setIsBorder}
-            setItems={setItemsBorder}
             containerStyle={styles.dropDownContainerStyle}
           />
         </View>
-        {isBorder ? (
+        {isBorder === 'true' ? (
           <View style={{flex: 0.85, flexDirection: 'row'}}>
             <DropDownPicker
+              onChangeValue={() => handleData('borderType', borderType)}
               dropDownDirection="TOP"
               style={styles.dropdown}
               open={openSecond}
-              value={typeBorder}
+              value={borderType}
               items={itemsTypeBorder}
               setOpen={setOpenSecond}
-              setValue={setTypeBorder}
-              setItems={setItemsTypeBorder}
+              setValue={setBoderType}
               containerStyle={styles.dropDownContainerStyle}
             />
-            <PrimaryInput children="px" />
+            <PrimaryInput
+              children="px"
+              value={value}
+              onChangeText={onChangeText}
+            />
           </View>
         ) : null}
       </View>

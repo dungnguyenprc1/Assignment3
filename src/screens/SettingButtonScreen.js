@@ -1,10 +1,9 @@
-import {View, Text, ScrollView} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {View, ScrollView, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import {useDispatch, useSelector} from 'react-redux';
 import ButtonCustomize from '../Button/ButtonCustomize';
 import {lowerLetter} from '../helper';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import {
   FooterContainer,
   Header,
@@ -13,42 +12,21 @@ import {
   TextResult,
 } from './SettingButtonScreen.styled';
 import FormInput from '../components/FormInput/FormInput';
+import {SET_BUTTON} from '../redux/slice/buttonSlice';
+import {ADD_LISTS} from '../redux/slice/listsSlice';
+
+// import {propertyButton} from '../redux/slice/buttonSlice';
 
 export default function SettingButtonScreen() {
-  const [propertyButton, setPropertyButton] = useState({
-    text: '',
-    textColor: '',
-    backGroundColor: '',
-    buttonWidth: 0,
-    buttonHeight: 0,
-    isBorder: '',
-    borderType: '',
-    borderWidth: 0,
-    borderRadius: 0,
-    borderColor: '',
-  });
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    getMyStringValue();
-  }, [propertyButton.isBorder]);
+  const propertyButton = useSelector(state => state.button);
 
-  async function getMyStringValue() {
-    const value = await AsyncStorage.getItem('isBorder1');
+  const handleValue = (name, values) => {
+    dispatch(SET_BUTTON({name, values}));
+  };
 
-    console.log('value', value);
-    setPropertyButton(prev => ({...prev, isBorder: value}));
-  }
-
-  // const getMyStringValue = async () => {
-  //   try {
-  //     return await AsyncStorage.getItem('isBorder1');
-  //   } catch (e) {
-  //     // read error
-  //   }
-
-  // };
-
-  console.log('propertyButton.isBorder', propertyButton.isBorder);
+  console.log('propertyButton.isBorder', propertyButton);
 
   const [itemsWidthHeight] = useState([
     {label: 'Dynamic', value: 'dynamic'},
@@ -61,7 +39,9 @@ export default function SettingButtonScreen() {
         <ScrollView style={{paddingBottom: 141}}>
           <Header>
             <TextHeader>Button Setting</TextHeader>
-            <TextCreate>Create</TextCreate>
+            <TouchableOpacity>
+              <TextCreate>Create</TextCreate>
+            </TouchableOpacity>
           </Header>
           <View style={{marginTop: 49}}>
             <FormInput
@@ -69,21 +49,11 @@ export default function SettingButtonScreen() {
               type="primary"
               placeholder="Title Button"
               value={propertyButton.text}
-              onChangeText={value =>
-                setPropertyButton({
-                  ...propertyButton,
-                  text: value,
-                })
-              }
+              onChangeText={value => handleValue('text', value)}
             />
             <FormInput
               value={propertyButton.textColor}
-              onChangeText={value =>
-                setPropertyButton(prev => ({
-                  ...prev,
-                  textColor: value,
-                }))
-              }
+              onChangeText={value => handleValue('textColor', value)}
               placeholder="#CB2E2E"
               name="Button text color"
               type="primary"
@@ -97,12 +67,7 @@ export default function SettingButtonScreen() {
             />
             <FormInput
               value={propertyButton.backGroundColor}
-              onChangeText={value =>
-                setPropertyButton(prev => ({
-                  ...prev,
-                  backGroundColor: value,
-                }))
-              }
+              onChangeText={value => handleValue('backGroundColor', value)}
               placeholder="#CB2E2E"
               name="Background color"
               type="primary"
@@ -120,47 +85,42 @@ export default function SettingButtonScreen() {
               name="Button Width"
               type="multi"
               value={propertyButton.buttonWidth}
-              onChangeText={value =>
-                setPropertyButton(prev => ({
-                  ...prev,
-                  buttonWidth: value,
-                }))
-              }
+              onChangeText={value => handleValue('buttonWidth', value)}
               itemsWidthHeight={itemsWidthHeight}
             />
             <FormInput
               name="Button Height"
               type="multi"
               value={propertyButton.buttonHeight}
-              onChangeText={value =>
-                setPropertyButton(prev => ({
-                  ...prev,
-                  buttonHeight: value,
-                }))
-              }
+              onChangeText={value => handleValue('buttonHeight', value)}
               itemsWidthHeight={itemsWidthHeight}
             />
-            <FormInput name="Border" type="border" />
+            <FormInput
+              name="Border"
+              type="border"
+              value={propertyButton.borderWidth}
+              onChangeText={value => handleValue('borderWidth', value)}
+            />
+            {propertyButton.borderType === 'dashed' && (
+              <FormInput
+                // value={propertyButton.borderRadius}
+                // onChangeText={value => handleValue('borderRadius', value)}
+                name="Border Dash pattern"
+                type="primary"
+              />
+            )}
+
             <FormInput
               value={propertyButton.borderRadius}
-              onChangeText={value =>
-                setPropertyButton(prev => ({
-                  ...prev,
-                  borderRadius: value,
-                }))
-              }
+              onChangeText={value => handleValue('borderRadius', value)}
               placeholder="#CB2E2E"
               name="Border Radius"
               type="primary"
             />
+
             <FormInput
               value={propertyButton.borderColor}
-              onChangeText={value =>
-                setPropertyButton(prev => ({
-                  ...prev,
-                  borderColor: value,
-                }))
-              }
+              onChangeText={value => handleValue('borderColor', value)}
               placeholder="#CB2E2E"
               name="Border Color"
               type="primary"
@@ -178,18 +138,17 @@ export default function SettingButtonScreen() {
 
       <FooterContainer>
         <TextResult>Result</TextResult>
-
-        <View style={{flex: 1}}>
-          <ButtonCustomize
-            title={propertyButton.text}
-            textColor={propertyButton.textColor}
-            backGroundColor={propertyButton.backGroundColor}
-            width={propertyButton.buttonWidth}
-            height={propertyButton.buttonHeight}
-            borderRadius={propertyButton.borderRadius}
-            borderColor={propertyButton.borderColor}
-          />
-        </View>
+        <ButtonCustomize
+          title={propertyButton.text}
+          textColor={propertyButton.textColor}
+          backGroundColor={propertyButton.backGroundColor}
+          width={propertyButton.buttonWidth}
+          height={propertyButton.buttonHeight}
+          borderWidth={propertyButton.borderWidth}
+          borderRadius={propertyButton.borderRadius}
+          borderColor={propertyButton.borderColor}
+          borderType={propertyButton.borderType}
+        />
       </FooterContainer>
     </View>
   );

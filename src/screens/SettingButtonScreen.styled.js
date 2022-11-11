@@ -4,7 +4,6 @@ export const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
   background-color: red;
-  /* margin-bottom: 49px; */
 `;
 
 export const TextHeader = styled.Text`

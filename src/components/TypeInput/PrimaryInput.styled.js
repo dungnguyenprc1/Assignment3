@@ -12,16 +12,15 @@ export const ContainerInput = styled.View`
   margin-bottom: 18px;
 `;
 
-export const ContainerIcon = styled.View`
-  height: 18px;
-  width: 18px;
-`;
-
 export const ContainerMulti = styled.View`
   flex-direction: row;
 `;
 export const TextAlign = styled.Text`
   line-height: 38px;
+`;
+export const TextInputPrimary = styled.TextInput`
+  height: 40px;
+  flex: 1;
 `;
 
 export const CoverInputMulti = styled.View`

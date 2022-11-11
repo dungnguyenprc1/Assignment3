@@ -1,10 +1,9 @@
-import {View, Text} from 'react-native';
 import React from 'react';
-import {Container, TextBold, Title} from './FormInput.styled';
 import PrimaryInput from '../TypeInput/PrimaryInput';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import MultiSelect from '../TypeInput/MultiSelect';
+import {Container, TextBold} from './FormInput.styled';
+
 import BorderCustomize from '../TypeInput/BorderCustomize';
+import MultiSelect from '../TypeInput/MultiSelect';
 
 export default function FormInput({
   itemsWidthHeight,
@@ -53,7 +52,9 @@ export default function FormInput({
           itemsBorder={itemsBorder}
         />
       ) : null}
-      {type === 'border' ? <BorderCustomize /> : null}
+      {type === 'border' ? (
+        <BorderCustomize value={value} onChangeText={onChangeText} />
+      ) : null}
     </Container>
   );
 }

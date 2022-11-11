@@ -1,15 +1,20 @@
 import styled from 'styled-components/native';
 
-export const TextCustomize = styled.Text`
-  color: ${props => props.color};
+export const TextCustomize = styled.View`
   background-color: ${props => props.backGroundColor};
   width: ${props => props.width || null}px;
   height: ${props => props.height || null}px;
+  line-height: ${props => props.height || null}px;
+  border-width: ${props => props.borderWidth}px;
+  border-radius: ${props => props.borderRadius}px;
+  border-color: ${props => props.borderColor};
+  border-style: ${props => props.borderType};
+  /* border-style: dashed; */
 
-  /* border-radius: 50px;
-  justify-content: center; */
-  border-color: red;
-  /* border-width: 5px; */
-  overflow: hidden;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TextProps = styled.Text`
+  color: ${props => props.textColor}; ;
 `;

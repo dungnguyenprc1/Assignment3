@@ -13,18 +13,9 @@ import PrimaryInput from './PrimaryInput';
 
 DropDownPicker.setListMode('SCROLLVIEW');
 
-export default function MultiSelect({
-  children,
-  placeholder,
-  value,
-  itemsWidthHeight,
-  itemsBorder,
-  onChangeText,
-}) {
-  //   console.log(itemsWidthHeight);
+export default function MultiSelect({value, itemsWidthHeight, onChangeText}) {
   const [open, setOpen] = useState(false);
-  const [valueWidthHeight, setValueWidthHeight] = useState('fixed');
-  const [valueBorder, setValueBorder] = useState('no');
+  const [valueWidthHeight, setValueWidthHeight] = useState('dynamic');
 
   return (
     <ContainerMulti>
@@ -32,10 +23,10 @@ export default function MultiSelect({
         dropDownDirection="TOP"
         style={styles.dropdown}
         open={open}
-        value={itemsWidthHeight ? valueWidthHeight : valueBorder}
-        items={itemsWidthHeight || itemsBorder}
+        value={valueWidthHeight}
+        items={itemsWidthHeight}
         setOpen={setOpen}
-        setValue={itemsWidthHeight ? setValueWidthHeight : setValueBorder}
+        setValue={setValueWidthHeight}
         containerStyle={styles.dropDownContainerStyle}
       />
       {valueWidthHeight === 'fixed' ? (

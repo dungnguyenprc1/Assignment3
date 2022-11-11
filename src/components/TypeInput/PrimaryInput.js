@@ -1,6 +1,6 @@
-import {View, Text, TextInput} from 'react-native';
 import React from 'react';
-import {ContainerIcon, ContainerInput} from './PrimaryInput.styled';
+import {Text} from 'react-native';
+import {ContainerInput, TextInputPrimary} from './PrimaryInput.styled';
 
 export default function PrimaryInput({
   children,
@@ -10,8 +10,7 @@ export default function PrimaryInput({
 }) {
   return (
     <ContainerInput>
-      <TextInput
-        style={{height: 40, flex: 1}}
+      <TextInputPrimary
         placeholder={placeholder}
         value={value}
         onChangeText={onChangeText}
