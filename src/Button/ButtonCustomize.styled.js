@@ -2,19 +2,17 @@ import styled from 'styled-components/native';
 
 export const TextCustomize = styled.View`
   background-color: ${props => props.backGroundColor};
-  width: ${props => props.width || null}px;
-  height: ${props => props.height || null}px;
-  line-height: ${props => props.height || null}px;
-  border-width: ${props => props.borderWidth}px;
-  border-radius: ${props => props.borderRadius}px;
-  border-color: ${props => props.borderColor};
-  border-style: ${props => props.borderType};
-  /* border-style: dashed; */
+  width: ${({width}) => width || 0}px;
+  height: ${({height}) => height || 0}px;
+  border-width: ${({borderWidth}) => borderWidth || 0}px;
+  border-radius: ${({borderRadius}) => borderRadius || 0}px;
+  border-color: ${({borderColor}) => borderColor};
+  border-style: ${({borderType}) => borderType};
 
   justify-content: center;
   align-items: center;
 `;
 
 export const TextProps = styled.Text`
-  color: ${props => props.textColor}; ;
+  color: ${({textColor}) => textColor};
 `;

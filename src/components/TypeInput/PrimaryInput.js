@@ -7,13 +7,18 @@ export default function PrimaryInput({
   placeholder,
   value,
   onChangeText,
+  ...props
 }) {
+  console.log('props', props);
   return (
     <ContainerInput>
       <TextInputPrimary
+        paddingLeft={props.paddingLeft}
         placeholder={placeholder}
         value={value}
         onChangeText={onChangeText}
+        // autoFocus={true}
+        // keyboard={'numeric'}
       />
       <Text> {children}</Text>
     </ContainerInput>

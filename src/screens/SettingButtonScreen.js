@@ -1,12 +1,20 @@
-import {View, ScrollView, TouchableOpacity} from 'react-native';
+import {
+  View,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+  SafeAreaView,
+} from 'react-native';
 import React, {useState} from 'react';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useDispatch, useSelector} from 'react-redux';
 import ButtonCustomize from '../Button/ButtonCustomize';
 import {lowerLetter} from '../helper';
 import {
   FooterContainer,
   Header,
+  SearchContainer,
   TextCreate,
   TextHeader,
   TextResult,
@@ -14,8 +22,6 @@ import {
 import FormInput from '../components/FormInput/FormInput';
 import {SET_BUTTON} from '../redux/slice/buttonSlice';
 import {ADD_LISTS} from '../redux/slice/listsSlice';
-
-// import {propertyButton} from '../redux/slice/buttonSlice';
 
 export default function SettingButtonScreen() {
   const dispatch = useDispatch();
@@ -26,7 +32,9 @@ export default function SettingButtonScreen() {
     dispatch(SET_BUTTON({name, values}));
   };
 
-  console.log('propertyButton.isBorder', propertyButton);
+  const handleAddList = () => {
+    dispatch(ADD_LISTS(propertyButton));
+  };
 
   const [itemsWidthHeight] = useState([
     {label: 'Dynamic', value: 'dynamic'},
@@ -34,16 +42,39 @@ export default function SettingButtonScreen() {
   ]);
 
   return (
-    <View style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#FFF'}}>
       <View style={{flex: 0.75, paddingHorizontal: 30}}>
-        <ScrollView style={{paddingBottom: 141}}>
-          <Header>
-            <TextHeader>Button Setting</TextHeader>
-            <TouchableOpacity>
-              <TextCreate>Create</TextCreate>
-            </TouchableOpacity>
-          </Header>
-          <View style={{marginTop: 49}}>
+        <ScrollView
+          style={{paddingBottom: 141}}
+          showsVerticalScrollIndicator={false}>
+          <View>
+            <Header>
+              <TextHeader>Button Setting</TextHeader>
+              <TouchableOpacity onPress={handleAddList}>
+                <TextCreate>Create</TextCreate>
+              </TouchableOpacity>
+            </Header>
+            <SearchContainer>
+              <AntDesign
+                name="search1"
+                size={14}
+                color="orange"
+                style={{position: 'absolute', left: 4, top: 32}}
+              />
+              <FormInput
+                type="primary"
+                placeholder="Search Property Here"
+                paddingLeft="4px"
+              />
+
+              <AntDesign
+                name="filter"
+                size={22}
+                style={{paddingHorizontal: 8}}
+              />
+            </SearchContainer>
+          </View>
+          <View>
             <FormInput
               name="Button text"
               type="primary"
@@ -150,6 +181,6 @@ export default function SettingButtonScreen() {
           borderType={propertyButton.borderType}
         />
       </FooterContainer>
-    </View>
+    </SafeAreaView>
   );
 }

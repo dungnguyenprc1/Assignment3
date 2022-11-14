@@ -14,7 +14,10 @@ export default function FormInput({
   placeholder,
   value,
   onChangeText,
+  ...passProps
 }) {
+  const props = {...passProps};
+  console.log('123123111', {props});
   // function inputSwitch(type1) {
   //   console.log('123123123123');
   //   if (!type1) {
@@ -37,6 +40,7 @@ export default function FormInput({
       {/* {inputSwitch(type)} */}
       {type === 'primary' ? (
         <PrimaryInput
+          // paddingLeft
           placeholder={placeholder}
           value={value}
           onChangeText={onChangeText}>

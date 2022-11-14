@@ -4,8 +4,8 @@ const initialState = {
   text: '',
   textColor: '',
   backGroundColor: '',
-  buttonWidth: 0,
-  buttonHeight: 0,
+  buttonWidth: 'auto',
+  buttonHeight: 'auto',
   isBorder: 'false',
   borderType: 'solid',
   borderWidth: 0,
@@ -19,7 +19,6 @@ const buttonSlice = createSlice({
   reducers: {
     SET_BUTTON: (state, {payload}) => {
       const {name, values} = payload;
-      console.log('payload', payload);
       state[name] = values;
     },
   },

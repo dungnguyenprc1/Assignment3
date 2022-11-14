@@ -19,6 +19,8 @@ export const TextAlign = styled.Text`
   line-height: 38px;
 `;
 export const TextInputPrimary = styled.TextInput`
+  padding-left: ${props => props.paddingLeft || 0}px;
+
   height: 40px;
   flex: 1;
 `;
