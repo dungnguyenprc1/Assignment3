@@ -1,9 +1,15 @@
 import styled from 'styled-components/native';
 
+export const Container = styled.SafeAreaView`
+  flex: 1;
+  background-color: #fff;
+`;
+
 export const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
   background-color: red;
+  margin-bottom: 49px;
 `;
 
 export const TextHeader = styled.Text`
@@ -28,12 +34,20 @@ export const TextResult = styled.Text`
 `;
 export const FooterContainer = styled.View`
   flex: 0.25;
-  /* margin-top: 114px; */
   background-color: #f1f1f1;
   align-items: center;
 `;
 
 export const SearchContainer = styled.View`
+  /* height: 40px; */
+  margin: 24px 0px 16px 30px;
   flex-direction: row;
   align-items: center;
+  /* justify-content: center; */
+`;
+
+export const DisplayCard = styled.View`
+  padding-bottom: 20px;
+  margin-left: 16px;
+  align-items: flex-start;
 `;

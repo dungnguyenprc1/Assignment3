@@ -1,19 +1,17 @@
-import {View, Text, TextInput, StyleSheet} from 'react-native';
 import React, {useState} from 'react';
-import {
-  ContainerIcon,
-  ContainerInput,
-  ContainerMulti,
-  CoverInputMulti,
-  TextAlign,
-} from './PrimaryInput.styled';
+import {StyleSheet} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import styled from 'styled-components';
 import PrimaryInput from './PrimaryInput';
+import {ContainerMulti} from './PrimaryInput.styled';
 
 DropDownPicker.setListMode('SCROLLVIEW');
 
-export default function MultiSelect({value, itemsWidthHeight, onChangeText}) {
+export default function MultiSelect({
+  value,
+  itemsWidthHeight,
+  onChangeText,
+  nameWidthHeight,
+}) {
   const [open, setOpen] = useState(false);
   const [valueWidthHeight, setValueWidthHeight] = useState('dynamic');
 
@@ -29,9 +27,9 @@ export default function MultiSelect({value, itemsWidthHeight, onChangeText}) {
         setValue={setValueWidthHeight}
         containerStyle={styles.dropDownContainerStyle}
       />
-      {valueWidthHeight === 'fixed' ? (
+      {valueWidthHeight === 'fixed' && (
         <PrimaryInput children="px" value={value} onChangeText={onChangeText} />
-      ) : null}
+      )}
     </ContainerMulti>
   );
 }

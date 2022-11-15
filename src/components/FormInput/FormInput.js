@@ -7,17 +7,15 @@ import MultiSelect from '../TypeInput/MultiSelect';
 
 export default function FormInput({
   itemsWidthHeight,
-  itemsBorder,
   type,
   name,
   icon,
   placeholder,
   value,
   onChangeText,
+  style,
   ...passProps
 }) {
-  const props = {...passProps};
-  console.log('123123111', {props});
   // function inputSwitch(type1) {
   //   console.log('123123123123');
   //   if (!type1) {
@@ -43,7 +41,8 @@ export default function FormInput({
           // paddingLeft
           placeholder={placeholder}
           value={value}
-          onChangeText={onChangeText}>
+          onChangeText={onChangeText}
+          style={style}>
           {icon}
         </PrimaryInput>
       ) : null}
@@ -53,7 +52,6 @@ export default function FormInput({
           onChangeText={onChangeText}
           children="px"
           itemsWidthHeight={itemsWidthHeight}
-          itemsBorder={itemsBorder}
         />
       ) : null}
       {type === 'border' ? (

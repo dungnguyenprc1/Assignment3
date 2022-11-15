@@ -23,7 +23,7 @@ export default function BorderCustomize({value, onChangeText}) {
   const [borderType, setBoderType] = useState(
     useSelector(state => state.button.borderType),
   );
-  console.log('borderType', borderType);
+  // console.log('borderType', borderType);
   const [itemsTypeBorder] = useState([
     {label: 'Solid', value: 'solid'},
     {label: 'Dash', value: 'dashed'},

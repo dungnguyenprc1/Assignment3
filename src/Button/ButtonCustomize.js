@@ -1,20 +1,20 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import {lowerLetter} from '../helper';
 import {TextCustomize, TextProps} from './ButtonCustomize.styled';
 
 export default function ButtonCustomize({
-  title,
-  textColor,
-  backGroundColor,
-  width = false,
-  height = false,
+  title = false,
+  textColor = false,
+  backGroundColor = false,
+  width,
+  height,
   borderRadius,
   borderColor,
   borderWidth,
   borderType,
 }) {
-  console.log(width);
+  // console.log('width', width);
   return (
     <View>
       <TextCustomize

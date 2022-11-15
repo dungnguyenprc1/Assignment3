@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {useState} from 'react';
+
 const initialState = {
   listItems: [],
 };
@@ -12,12 +12,10 @@ const listsSlice = createSlice({
       const length = state.listItems.length;
       const tempList = {...payload, id: length};
       state.listItems.push(tempList);
-      console.log(state.listItems);
     },
   },
 });
 
-export const {ADD_LISTS} = listsSlice.actions;
-
+export const {ADD_LISTS, SEARCH_LISTS} = listsSlice.actions;
 export const selectAllButton = state => state.lists.listItems;
 export default listsSlice.reducer;
