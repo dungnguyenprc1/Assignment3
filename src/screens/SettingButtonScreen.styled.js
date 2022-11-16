@@ -1,8 +1,11 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
+  position: relative;
   flex: 1;
   background-color: #fff;
+  width: 100%;
+  /* z-index: -1; */
 `;
 
 export const Header = styled.View`
@@ -40,7 +43,7 @@ export const FooterContainer = styled.View`
 
 export const SearchContainer = styled.View`
   /* height: 40px; */
-  margin: 24px 0px 16px 30px;
+  /* margin: 24px 0px 16px 30px; */
   flex-direction: row;
   align-items: center;
   /* justify-content: center; */

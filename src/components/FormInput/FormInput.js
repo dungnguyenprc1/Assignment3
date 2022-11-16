@@ -16,27 +16,12 @@ export default function FormInput({
   style,
   ...passProps
 }) {
-  // function inputSwitch(type1) {
-  //   console.log('123123123123');
-  //   if (!type1) {
-  //     console.log('kcogi');
-  //     return;
-  //   }
-  //   if (type1) {
-  //     switch (true) {
-  //       case 'primary':
-  //         console('123123');
-  //         return (type1 = <PrimaryInput />);
-  //     }
-  //   }
-  // }
-
   return (
     <Container>
       <TextBold>{name}</TextBold>
 
       {/* {inputSwitch(type)} */}
-      {type === 'primary' ? (
+      {type === 'primary' && (
         <PrimaryInput
           // paddingLeft
           placeholder={placeholder}
@@ -45,18 +30,18 @@ export default function FormInput({
           style={style}>
           {icon}
         </PrimaryInput>
-      ) : null}
-      {type === 'multi' ? (
+      )}
+      {type === 'multi' && (
         <MultiSelect
           value={value}
           onChangeText={onChangeText}
           children="px"
           itemsWidthHeight={itemsWidthHeight}
         />
-      ) : null}
-      {type === 'border' ? (
+      )}
+      {type === 'border' && (
         <BorderCustomize value={value} onChangeText={onChangeText} />
-      ) : null}
+      )}
     </Container>
   );
 }

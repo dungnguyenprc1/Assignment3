@@ -13,6 +13,7 @@ export const TextCustomize = styled.View`
 
   justify-content: center;
   align-items: center;
+  stroke-dasharray: 100px;
 `;
 
 export const TextProps = styled.Text`

@@ -10,7 +10,7 @@ const listsSlice = createSlice({
   reducers: {
     ADD_LISTS: (state, {payload}) => {
       const length = state.listItems.length;
-      const tempList = {...payload, id: length};
+      const tempList = {...payload, id: length + 1};
       state.listItems.push(tempList);
     },
   },

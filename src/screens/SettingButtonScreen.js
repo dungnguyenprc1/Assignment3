@@ -1,5 +1,11 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, TouchableOpacity, View} from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  View,
+  Dimensions,
+} from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {useDispatch, useSelector} from 'react-redux';
 import ButtonCustomize from '../Button/ButtonCustomize';
@@ -18,7 +24,9 @@ import {
 
 export default function SettingButtonScreen() {
   const dispatch = useDispatch();
-
+  const deviceWidth = Dimensions.get('window').width;
+  const deviceHeight = Dimensions.get('window').height;
+  console.log(deviceWidth, deviceHeight);
   const propertyButton = useSelector(state => state.button);
 
   const handleValue = (name, values) => {
@@ -27,6 +35,8 @@ export default function SettingButtonScreen() {
 
   const handleAddList = () => {
     dispatch(ADD_LISTS(propertyButton));
+    // eslint-disable-next-line no-alert
+    alert('The button have been added to list');
   };
 
   const itemsWidthHeight = [
@@ -116,7 +126,6 @@ export default function SettingButtonScreen() {
             <FormInput
               value={propertyButton.borderRadius}
               onChangeText={value => handleValue('borderRadius', value)}
-              placeholder="#CB2E2E"
               name="Border Radius"
               type="primary"
             />
@@ -124,7 +133,7 @@ export default function SettingButtonScreen() {
             <FormInput
               value={propertyButton.borderColor}
               onChangeText={value => handleValue('borderColor', value)}
-              placeholder="#CB2E2E"
+              placeholder="#000000"
               name="Border Color"
               type="primary"
               icon={

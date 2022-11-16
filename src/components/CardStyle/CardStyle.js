@@ -31,7 +31,7 @@ export default function CardStyle({
         />
       </ButtonView>
       <ContentView>
-        <Text>ID: {id + 1}</Text>
+        <Text>ID: {id}</Text>
         <Text>Name: {title}</Text>
       </ContentView>
     </Container>

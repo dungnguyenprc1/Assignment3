@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
-import {FlatList, StyleSheet, Text} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useSelector} from 'react-redux';
 import CardStyle from '../../components/CardStyle/CardStyle';
+import FilterList from '../../components/Dropdown/Filter/FilterList';
+import DropdownSearch from '../../components/Dropdown/Search/DropdownSearch';
 import PrimaryInput from '../../components/TypeInput/PrimaryInput';
 import {
   Container,
@@ -12,6 +14,7 @@ import {
 
 export default function ShowButtonScreen() {
   const [searchData, setSearchData] = useState('');
+  const [isFilter, setIsFilter] = useState(true);
   const showDemoButton = useSelector(state => {
     if (!searchData) {
       return state.lists.listItems;
@@ -49,22 +52,31 @@ export default function ShowButtonScreen() {
   };
   return (
     <Container>
-      <SearchContainer>
-        <AntDesign
-          name="search1"
-          size={18}
-          color="orange"
-          style={styles.searchIcon}
-        />
-        <PrimaryInput
-          style={styles.customInput}
-          placeholder="Search Here"
-          value={searchData}
-          onChangeText={e => handleChangeSearch(e)}
-        />
+      <View style={{paddingLeft: 30}}>
+        <SearchContainer>
+          <AntDesign
+            name="search1"
+            size={18}
+            color="orange"
+            style={styles.searchIcon}
+          />
+          <PrimaryInput
+            style={styles.customInput}
+            placeholder="Search Here"
+            value={searchData}
+            onChangeText={e => handleChangeSearch(e)}
+          />
 
-        <AntDesign name="filter" size={22} style={styles.filterIcon} />
-      </SearchContainer>
+          <TouchableOpacity onPress={() => setIsFilter(!isFilter)}>
+            <AntDesign name="filter" size={22} style={styles.filterIcon} />
+          </TouchableOpacity>
+        </SearchContainer>
+        {searchData && (
+          <DropdownSearch dataSource={showDemoButton} searched={searchData} />
+        )}
+        {isFilter && <FilterList dataSource={showDemoButton} />}
+      </View>
+
       <DisplayCard>
         <FlatList
           data={showDemoButton}

@@ -6,8 +6,7 @@ import SettingButtonScreen from './src/screens/SettingButtonScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import store from './src/redux/store';
-
-import ShowButtonScreen from './src/screens/ShowButtonScreen.js/ShowButtonScreen';
+import ShowButtonScreen from './src/screens/ShowButtonScreen/ShowButtonScreen';
 
 const Tab = createBottomTabNavigator();
 export default function App() {
@@ -16,6 +15,7 @@ export default function App() {
       <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen name="Home" component={SettingButtonScreen} />
+
           <Tab.Screen name="Settings" component={ShowButtonScreen} />
         </Tab.Navigator>
       </NavigationContainer>
