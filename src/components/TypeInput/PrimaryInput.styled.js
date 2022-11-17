@@ -33,3 +33,13 @@ export const CoverInputMulti = styled.View`
   flex-direction: row;
   padding: 0 15px;
 `;
+
+export const Border = styled.View`
+  flex: 0.85;
+  flex-direction: row;
+`;
+
+export const Layout = styled.View`
+  flex: ${props => props.flex};
+  flex-direction: ${props => props.flexDirection || 'column'}; ;
+`;

@@ -7,7 +7,7 @@ export default function CardStyle({
   id,
   title,
   textColor,
-  backGroundColor,
+  backgroundColor,
   width,
   height,
   borderWidth,
@@ -22,7 +22,7 @@ export default function CardStyle({
           title={title}
           textColor={textColor}
           height={height}
-          backGroundColor={backGroundColor}
+          backgroundColor={backgroundColor}
           width={width}
           borderColor={borderColor}
           borderWidth={borderWidth}

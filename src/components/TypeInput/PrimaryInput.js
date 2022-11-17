@@ -11,7 +11,6 @@ export default function PrimaryInput({
   style,
   ...props
 }) {
-  // console.log('props', style);
   return (
     <ContainerInput>
       <TextInputPrimary
@@ -19,10 +18,8 @@ export default function PrimaryInput({
         placeholder={placeholder}
         value={value}
         onChangeText={onChangeText}
-        autoFocus={true}
         style={{...style}}
         editable={editable}
-        // keyboard={'numeric'}
       />
       <Text> {children}</Text>
     </ContainerInput>

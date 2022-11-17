@@ -14,9 +14,9 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Home" component={SettingButtonScreen} />
+          <Tab.Screen name="Settings" component={SettingButtonScreen} />
 
-          <Tab.Screen name="Settings" component={ShowButtonScreen} />
+          <Tab.Screen name="Lists" component={ShowButtonScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>

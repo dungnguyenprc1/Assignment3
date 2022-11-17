@@ -4,7 +4,7 @@ import {Dimensions} from 'react-native';
 const screenWidth = Dimensions.get('screen').width;
 
 export const Container = styled.View`
-  /* z-index: 100; */
+  z-index: 10;
   position: absolute;
   border: solid 1px #d9d9d9;
   top: 41px;

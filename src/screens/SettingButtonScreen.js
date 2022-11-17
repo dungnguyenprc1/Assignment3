@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-  View,
-  Dimensions,
-} from 'react-native';
+import {ScrollView, TouchableOpacity, View} from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+
 import {useDispatch, useSelector} from 'react-redux';
 import ButtonCustomize from '../Button/ButtonCustomize';
 import FormInput from '../components/FormInput/FormInput';
@@ -14,9 +9,11 @@ import {lowerLetter} from '../helper';
 import {SET_BUTTON} from '../redux/slice/buttonSlice';
 import {ADD_LISTS} from '../redux/slice/listsSlice';
 import {
+  BorderIcon,
   Container,
   FooterContainer,
   Header,
+  Layout,
   TextCreate,
   TextHeader,
   TextResult,
@@ -24,10 +21,19 @@ import {
 
 export default function SettingButtonScreen() {
   const dispatch = useDispatch();
-  const deviceWidth = Dimensions.get('window').width;
-  const deviceHeight = Dimensions.get('window').height;
-  console.log(deviceWidth, deviceHeight);
   const propertyButton = useSelector(state => state.button);
+
+  const {
+    text,
+    textColor,
+    backgroundColor,
+    buttonWidth,
+    buttonHeight,
+    borderColor,
+    borderRadius,
+    borderType,
+    borderWidth,
+  } = propertyButton;
 
   const handleValue = (name, values) => {
     dispatch(SET_BUTTON({name, values}));
@@ -46,7 +52,7 @@ export default function SettingButtonScreen() {
 
   return (
     <Container>
-      <View style={{flex: 0.75, paddingHorizontal: 30}}>
+      <Layout flex={0.75}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View>
             <Header>
@@ -61,106 +67,122 @@ export default function SettingButtonScreen() {
               name="Button text"
               type="primary"
               placeholder="Title Button"
-              value={propertyButton.text}
+              value={text}
               onChangeText={value => handleValue('text', value)}
             />
             <FormInput
-              value={propertyButton.textColor}
+              value={textColor}
               onChangeText={value => handleValue('textColor', value)}
               placeholder="#CB2E2E"
               name="Button text color"
               type="primary"
               icon={
-                <Fontisto
-                  name="rectangle"
-                  size={18}
-                  color={lowerLetter(propertyButton.textColor) || '#CB2E2E'}
-                />
+                lowerLetter(textColor) === '#fff' ? (
+                  <BorderIcon>
+                    <Fontisto name="rectangle" size={14} color="#fff" />
+                  </BorderIcon>
+                ) : (
+                  <Fontisto
+                    name="rectangle"
+                    size={18}
+                    color={lowerLetter(textColor) || '#CB2E2E'}
+                  />
+                )
               }
             />
             <FormInput
-              value={propertyButton.backGroundColor}
-              onChangeText={value => handleValue('backGroundColor', value)}
+              value={backgroundColor}
+              onChangeText={value => handleValue('backgroundColor', value)}
               placeholder="#CB2E2E"
               name="Background color"
               type="primary"
               icon={
-                <Fontisto
-                  name="rectangle"
-                  size={18}
-                  color={
-                    lowerLetter(propertyButton.backGroundColor) || '#CB2E2E'
-                  }
-                />
+                lowerLetter(backgroundColor) === '#fff' ? (
+                  <BorderIcon>
+                    <Fontisto name="rectangle" size={14} color="#fff" />
+                  </BorderIcon>
+                ) : (
+                  <Fontisto
+                    name="rectangle"
+                    size={18}
+                    color={lowerLetter(backgroundColor) || '#CB2E2E'}
+                  />
+                )
               }
             />
             <FormInput
               name="Button Width"
               type="multi"
-              value={propertyButton.buttonWidth}
+              value={buttonWidth}
               onChangeText={value => handleValue('buttonWidth', value)}
               itemsWidthHeight={itemsWidthHeight}
             />
             <FormInput
               name="Button Height"
               type="multi"
-              value={propertyButton.buttonHeight}
+              value={buttonHeight}
               onChangeText={value => handleValue('buttonHeight', value)}
               itemsWidthHeight={itemsWidthHeight}
             />
             <FormInput
               name="Border"
               type="border"
-              value={propertyButton.borderWidth}
+              value={borderWidth}
               onChangeText={value => handleValue('borderWidth', value)}
             />
-            {propertyButton.borderType === 'dashed' && (
+            {borderType === 'dashed' && (
               <FormInput
-                // value={propertyButton.borderRadius}
-                // onChangeText={value => handleValue('borderRadius', value)}
+                // value={borderWidth}
+                // onChangeText={value => handleValue('borderWidth', value)}
                 name="Border Dash pattern"
                 type="primary"
               />
             )}
 
             <FormInput
-              value={propertyButton.borderRadius}
+              value={borderRadius}
               onChangeText={value => handleValue('borderRadius', value)}
               name="Border Radius"
               type="primary"
             />
 
             <FormInput
-              value={propertyButton.borderColor}
+              value={borderColor}
               onChangeText={value => handleValue('borderColor', value)}
               placeholder="#000000"
               name="Border Color"
               type="primary"
               icon={
-                <Fontisto
-                  name="rectangle"
-                  size={18}
-                  color={lowerLetter(propertyButton.borderColor)}
-                />
+                lowerLetter(borderColor) === '#fff' ? (
+                  <BorderIcon>
+                    <Fontisto name="rectangle" size={14} color="#fff" />
+                  </BorderIcon>
+                ) : (
+                  <Fontisto
+                    name="rectangle"
+                    size={18}
+                    color={lowerLetter(borderColor) || '#000000'}
+                  />
+                )
               }
             />
           </View>
         </ScrollView>
-      </View>
+      </Layout>
 
       <FooterContainer>
         <TextResult>Result</TextResult>
         <ScrollView>
           <ButtonCustomize
-            title={propertyButton.text}
-            textColor={propertyButton.textColor}
-            backGroundColor={propertyButton.backGroundColor}
-            width={propertyButton.buttonWidth}
-            height={propertyButton.buttonHeight}
-            borderWidth={propertyButton.borderWidth}
-            borderRadius={propertyButton.borderRadius}
-            borderColor={propertyButton.borderColor}
-            borderType={propertyButton.borderType}
+            title={text}
+            textColor={textColor}
+            backgroundColor={backgroundColor}
+            width={buttonWidth}
+            height={buttonHeight}
+            borderWidth={borderWidth}
+            borderRadius={borderRadius}
+            borderColor={borderColor}
+            borderType={borderType}
           />
         </ScrollView>
       </FooterContainer>

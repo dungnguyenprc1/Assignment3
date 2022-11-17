@@ -1,18 +1,20 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
-  position: relative;
   flex: 1;
   background-color: #fff;
   width: 100%;
-  /* z-index: -1; */
+`;
+
+export const BodyPadding = styled.View`
+  padding-left: 30px;
 `;
 
 export const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  background-color: red;
   margin-bottom: 49px;
+  margin-top: 41px;
 `;
 
 export const TextHeader = styled.Text`
@@ -26,8 +28,8 @@ export const TextHeader = styled.Text`
 export const TextCreate = styled.Text`
   padding-top: 15px;
   font-size: 18px;
-  font-weight: 400;
-  font-family: 'Roboto-Regular';
+  font-weight: 300;
+  font-family: 'Roboto-Thin';
 `;
 export const TextResult = styled.Text`
   font-size: 16px;
@@ -53,4 +55,12 @@ export const DisplayCard = styled.View`
   padding-bottom: 20px;
   margin-left: 16px;
   align-items: flex-start;
+`;
+
+export const BorderIcon = styled.View`
+  border-width: 2px;
+`;
+export const Layout = styled.View`
+  flex: ${({flex}) => flex};
+  padding: 0 30px;
 `;

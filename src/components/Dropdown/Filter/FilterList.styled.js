@@ -5,9 +5,6 @@ export const Container = styled.View`
   background-color: #ccc;
   top: 42px;
   right: 0;
-  left: 200px;
-  z-index: 100;
-
-  height: 500px;
-  /* z-index: 100; */
+  left: 100px;
+  z-index: 10;
 `;

@@ -1,53 +1,49 @@
 import React, {useState} from 'react';
+import {View} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import {Container} from './FilterList.styled';
-import _ from 'lodash';
+import {useDispatch, useSelector} from 'react-redux';
+import {ADD_FILTERED} from '../../../redux/slice/listsSlice';
 
-export default function FilterList({dataSource}) {
-  const [open, setOpen] = useState(true);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    {label: 'Apple', value: 'apple'},
-    {label: 'Banana', value: 'banana'},
-  ]);
+export default function FilterList({}) {
+  const dispatch = useDispatch();
 
-  const unique = [
-    ...new Set(
-      dataSource.map(arr => {
-        return Object.keys(arr);
-      }),
-    ),
-  ];
-  let filter = _.union(...unique);
-
-  const renderItem = ({item}) => {
-    return (
-      <TouchableOpacity onPress={() => alert('123')}>
-        <View>
-          <Text style={{marginBottom: 12, paddingLeft: 8}}>{item}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  };
+  const [value, setValue] = useState(
+    useSelector(state => state.lists.filtered),
+  );
 
   return (
     <Container>
-      <View style={{alignItems: 'center', borderBottomWidth: 1}}>
-        <Text>Filter</Text>
-      </View>
       <View>
         <DropDownPicker
-          open={open}
-          value={true}
-          items={items}
+          placeholder="Filter By Properties"
+          open={true}
+          value={value}
+          items={[
+            {label: 'Text', value: 'text'},
+            {label: 'Text Color', value: 'textColor'},
+            {label: 'Background Color', value: 'backgroundColor'},
+            {label: 'Width', value: 'buttonWidth'},
+            {label: 'Height', value: 'buttonHeight'},
+            {label: 'Border Width', value: 'borderWidth'},
+            {label: 'Border Radius', value: 'borderRadius'},
+            {label: 'Border Color', value: 'borderColor'},
+          ]}
           setValue={setValue}
-          setItems={setItems}
-        />
-        <FlatList
-          data={filter}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
+          theme="DARK"
+          multiple={true}
+          mode="BADGE"
+          maxHeight={500}
+          badgeDotColors={[
+            '#e76f51',
+            '#00b4d8',
+            '#e9c46a',
+            '#e76f51',
+            '#8ac926',
+            '#00b4d8',
+            '#e9c46a',
+          ]}
+          onChangeValue={e => dispatch(ADD_FILTERED(e))}
         />
       </View>
     </Container>

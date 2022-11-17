@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const TextCustomize = styled.View`
-  background-color: ${props => props.backGroundColor};
+  background-color: ${({backgroundColor}) => backgroundColor};
   width: auto;
   height: auto;
   width: ${({width}) => (width ? `${width}px` : 'auto')};

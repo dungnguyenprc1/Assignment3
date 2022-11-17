@@ -14,13 +14,10 @@ export default function FormInput({
   value,
   onChangeText,
   style,
-  ...passProps
 }) {
   return (
     <Container>
       <TextBold>{name}</TextBold>
-
-      {/* {inputSwitch(type)} */}
       {type === 'primary' && (
         <PrimaryInput
           // paddingLeft

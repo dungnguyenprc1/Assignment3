@@ -1,12 +1,12 @@
 import React from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import {View} from 'react-native';
 import {lowerLetter} from '../helper';
 import {TextCustomize, TextProps} from './ButtonCustomize.styled';
 
 export default function ButtonCustomize({
-  title = false,
-  textColor = false,
-  backGroundColor = false,
+  title,
+  textColor,
+  backgroundColor,
   width,
   height,
   borderRadius,
@@ -14,11 +14,10 @@ export default function ButtonCustomize({
   borderWidth,
   borderType,
 }) {
-  // console.log('width', width);
   return (
     <View>
       <TextCustomize
-        backGroundColor={lowerLetter(backGroundColor)}
+        backgroundColor={lowerLetter(backgroundColor)}
         width={width}
         height={height}
         borderRadius={borderRadius}

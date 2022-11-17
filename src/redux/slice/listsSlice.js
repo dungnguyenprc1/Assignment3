@@ -2,6 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
   listItems: [],
+  filtered: [],
 };
 
 const listsSlice = createSlice({
@@ -13,9 +14,13 @@ const listsSlice = createSlice({
       const tempList = {...payload, id: length + 1};
       state.listItems.push(tempList);
     },
+    ADD_FILTERED: (state, {payload}) => {
+      state.filtered = payload;
+    },
   },
 });
 
-export const {ADD_LISTS, SEARCH_LISTS} = listsSlice.actions;
+export const {ADD_LISTS, SEARCH_LISTS, ADD_FILTERED} = listsSlice.actions;
 export const selectAllButton = state => state.lists.listItems;
+export const selectAllFiltered = state => state.lists.filtered;
 export default listsSlice.reducer;

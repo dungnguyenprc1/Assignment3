@@ -6,7 +6,7 @@ import {Container, Popper} from './DropdownSearch.styled';
 export default function DropdownSearch({dataSource, searched}) {
   const unique = [
     ...new Set(
-      dataSource.map(arr => {
+      dataSource?.map(arr => {
         return Object.values(arr);
       }),
     ),
@@ -17,12 +17,14 @@ export default function DropdownSearch({dataSource, searched}) {
     <Container>
       {filtered.map((e, i) => {
         return (
-          <Popper>
-            <Text key={i}>{e}</Text>
+          <Popper key={i}>
+            <Text>{e}</Text>
           </Popper>
         );
       })}
-      <Popper>{dataSource.length === 0 && <Text>Nothing to Show</Text>}</Popper>
+      <Popper>
+        {dataSource?.length === 0 && <Text>Nothing to Show</Text>}
+      </Popper>
     </Container>
   );
 }

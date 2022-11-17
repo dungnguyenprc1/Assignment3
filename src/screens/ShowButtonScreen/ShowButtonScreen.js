@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
 import CardStyle from '../../components/CardStyle/CardStyle';
 import FilterList from '../../components/Dropdown/Filter/FilterList';
 import DropdownSearch from '../../components/Dropdown/Search/DropdownSearch';
 import PrimaryInput from '../../components/TypeInput/PrimaryInput';
+import {selectAllButton, selectAllFiltered} from '../../redux/slice/listsSlice';
 import {
+  BodyPadding,
   Container,
   DisplayCard,
   SearchContainer,
@@ -14,45 +17,88 @@ import {
 
 export default function ShowButtonScreen() {
   const [searchData, setSearchData] = useState('');
-  const [isFilter, setIsFilter] = useState(true);
-  const showDemoButton = useSelector(state => {
-    if (!searchData) {
-      return state.lists.listItems;
-    }
-    return state.lists.listItems.filter(item => {
-      return Object.keys(item).some(key => {
-        return item[key]
-          .toString()
-          .toLowerCase()
-          .includes(searchData.toLowerCase().trim());
+  const [isShowFilter, setIsShowFilter] = useState(false);
+
+  const filteredList = useSelector(selectAllFiltered);
+  const dataButton = useSelector(selectAllButton);
+
+  const arrayButtonData = useSelector(state => {
+    if (filteredList.length === 0) {
+      if (!searchData) {
+        return dataButton;
+      }
+      return dataButton.filter(item => {
+        return Object.keys(item).some(key => {
+          return item[key]
+            .toString()
+            .toLowerCase()
+            .includes(searchData.toLowerCase().trim());
+        });
       });
-    });
+    } else {
+      if (!searchData) {
+        return dataButton.filter(item => {
+          return Object.keys(item).some(key => {
+            return filteredList.some(key1 => {
+              return key.includes(key1);
+            });
+          });
+        });
+      }
+      return dataButton.filter(item => {
+        return Object.keys(item).some(key => {
+          return item[key]
+            .toString()
+            .toLowerCase()
+            .includes(searchData.toLowerCase().trim());
+        });
+      });
+    }
   });
 
-  console.log('showDemiButton', showDemoButton);
   const handleChangeSearch = e => {
     setSearchData(e);
   };
 
+  const EmptyListComponent = ({item}) => {
+    return (
+      <DisplayCard>
+        <Text>No Data To Show</Text>
+      </DisplayCard>
+    );
+  };
+
   const renderItem = ({item}) => {
+    const {
+      text,
+      textColor,
+      backgroundColor,
+      buttonWidth,
+      buttonHeight,
+      borderWidth,
+      borderRadius,
+      borderColor,
+      borderType,
+      id,
+    } = item;
     return (
       <CardStyle
-        title={item.text}
-        textColor={item.textColor}
-        backGroundColor={item.backGroundColor}
-        width={item.buttonWidth}
-        height={item.buttonHeight}
-        borderWidth={item.borderWidth}
-        borderRadius={item.borderRadius}
-        borderColor={item.borderColor}
-        borderType={item.borderType}
-        id={item.id}
+        title={text}
+        textColor={textColor}
+        backgroundColor={backgroundColor}
+        width={buttonWidth}
+        height={buttonHeight}
+        borderWidth={borderWidth}
+        borderRadius={borderRadius}
+        borderColor={borderColor}
+        borderType={borderType}
+        id={id}
       />
     );
   };
   return (
     <Container>
-      <View style={{paddingLeft: 30}}>
+      <BodyPadding>
         <SearchContainer>
           <AntDesign
             name="search1"
@@ -67,26 +113,23 @@ export default function ShowButtonScreen() {
             onChangeText={e => handleChangeSearch(e)}
           />
 
-          <TouchableOpacity onPress={() => setIsFilter(!isFilter)}>
-            <AntDesign name="filter" size={22} style={styles.filterIcon} />
+          <TouchableOpacity onPress={() => setIsShowFilter(!isShowFilter)}>
+            <Ionicons name="options" size={22} style={styles.filterIcon} />
           </TouchableOpacity>
         </SearchContainer>
-        {searchData && (
-          <DropdownSearch dataSource={showDemoButton} searched={searchData} />
-        )}
-        {isFilter && <FilterList dataSource={showDemoButton} />}
-      </View>
-
+      </BodyPadding>
+      {searchData && (
+        <DropdownSearch dataSource={arrayButtonData} searched={searchData} />
+      )}
+      {isShowFilter && <FilterList dataSource={arrayButtonData} />}
       <DisplayCard>
         <FlatList
-          data={showDemoButton}
+          data={arrayButtonData}
           renderItem={renderItem}
           keyExtractor={item => item.id}
+          ListEmptyComponent={EmptyListComponent}
         />
       </DisplayCard>
-      {showDemoButton.length === 0 && (
-        <Text style={styles.textError}> No Button To Show</Text>
-      )}
     </Container>
   );
 }
