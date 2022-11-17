@@ -1,9 +1,6 @@
 import React from 'react';
-import PrimaryInput from '../TypeInput/PrimaryInput';
 import {Container, TextBold} from './FormInput.styled';
-
-import BorderCustomize from '../TypeInput/BorderCustomize';
-import MultiSelect from '../TypeInput/MultiSelect';
+import {BorderCustomize, MultiSelect, PrimaryInput} from '../TypeInput';
 
 export default function FormInput({
   itemsWidthHeight,
@@ -13,6 +10,7 @@ export default function FormInput({
   placeholder,
   value,
   onChangeText,
+  autoFocus,
   style,
 }) {
   return (
@@ -20,7 +18,7 @@ export default function FormInput({
       <TextBold>{name}</TextBold>
       {type === 'primary' && (
         <PrimaryInput
-          // paddingLeft
+          autoFocus={autoFocus}
           placeholder={placeholder}
           value={value}
           onChangeText={onChangeText}

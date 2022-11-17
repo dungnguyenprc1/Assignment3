@@ -1,4 +1,4 @@
-const DATA = [
+export const DATA = [
   {
     id: 1,
     name: 'Button text',
@@ -12,31 +12,31 @@ const DATA = [
     placeholder: '#CB2E2E',
   },
   {
-    id: 1,
+    id: 3,
     name: 'Button text',
     type: 'primary',
     placeholder: 'Title Button',
   },
   {
-    id: 1,
+    id: 4,
     name: 'Button text',
     type: 'primary',
     placeholder: 'Title Button',
   },
   {
-    id: 1,
+    id: 5,
     name: 'Button text',
     type: 'primary',
     placeholder: 'Title Button',
   },
   {
-    id: 1,
+    id: 6,
     name: 'Button text',
     type: 'primary',
     placeholder: 'Title Button',
   },
   {
-    id: 1,
+    id: 7,
     name: 'Button text',
     type: 'primary',
     placeholder: 'Title Button',

@@ -13,7 +13,7 @@ export const BodyPadding = styled.View`
 export const Header = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 49px;
+  margin-bottom: ${({isPortrait}) => (isPortrait ? 49 : 0)}px;
   margin-top: 41px;
 `;
 
@@ -38,7 +38,7 @@ export const TextResult = styled.Text`
   font-family: 'Roboto-Thin';
 `;
 export const FooterContainer = styled.View`
-  flex: 0.25;
+  flex: ${({isPortrait}) => (isPortrait ? '0.25' : '0.75')};
   background-color: #f1f1f1;
   align-items: center;
 `;

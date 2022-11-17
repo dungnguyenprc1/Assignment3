@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     borderRadius: 0,
     borderColor: '#D9D9D9',
     marginBottom: 18,
+    paddingLeft: 20,
   },
   dropDownContainerStyle: {
     borderColor: '#D9D9D9',

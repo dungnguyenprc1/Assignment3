@@ -9,6 +9,7 @@ export default function PrimaryInput({
   onChangeText,
   editable,
   style,
+  autoFocus,
   ...props
 }) {
   return (
@@ -20,6 +21,7 @@ export default function PrimaryInput({
         onChangeText={onChangeText}
         style={{...style}}
         editable={editable}
+        autoFocus={autoFocus}
       />
       <Text> {children}</Text>
     </ContainerInput>

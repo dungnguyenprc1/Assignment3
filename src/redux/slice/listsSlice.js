@@ -11,8 +11,7 @@ const listsSlice = createSlice({
   reducers: {
     ADD_LISTS: (state, {payload}) => {
       const length = state.listItems.length;
-      const tempList = {...payload, id: length + 1};
-      state.listItems.push(tempList);
+      state.listItems.push({...payload, id: length + 1});
     },
     ADD_FILTERED: (state, {payload}) => {
       state.filtered = payload;

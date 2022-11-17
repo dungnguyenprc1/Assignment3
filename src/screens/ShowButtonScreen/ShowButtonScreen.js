@@ -4,9 +4,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
 import CardStyle from '../../components/CardStyle/CardStyle';
-import FilterList from '../../components/Dropdown/Filter/FilterList';
-import DropdownSearch from '../../components/Dropdown/Search/DropdownSearch';
-import PrimaryInput from '../../components/TypeInput/PrimaryInput';
+import {Filter, Search} from '../../components/Dropdown';
+import {PrimaryInput} from '../../components/TypeInput';
 import {selectAllButton, selectAllFiltered} from '../../redux/slice/listsSlice';
 import {
   BodyPadding,
@@ -21,8 +20,14 @@ export default function ShowButtonScreen() {
 
   const filteredList = useSelector(selectAllFiltered);
   const dataButton = useSelector(selectAllButton);
-
   const arrayButtonData = useSelector(state => {
+    const dataFiltered = dataButton.filter(item => {
+      return Object.keys(item).some(key => {
+        return filteredList.some(key1 => {
+          return key.includes(key1);
+        });
+      });
+    });
     if (filteredList.length === 0) {
       if (!searchData) {
         return dataButton;
@@ -37,15 +42,9 @@ export default function ShowButtonScreen() {
       });
     } else {
       if (!searchData) {
-        return dataButton.filter(item => {
-          return Object.keys(item).some(key => {
-            return filteredList.some(key1 => {
-              return key.includes(key1);
-            });
-          });
-        });
+        return dataFiltered;
       }
-      return dataButton.filter(item => {
+      return dataFiltered.filter(item => {
         return Object.keys(item).some(key => {
           return item[key]
             .toString()
@@ -60,10 +59,10 @@ export default function ShowButtonScreen() {
     setSearchData(e);
   };
 
-  const EmptyListComponent = ({item}) => {
+  const EmptyListComponent = () => {
     return (
       <DisplayCard>
-        <Text>No Data To Show</Text>
+        <Text>There's No Button To Show</Text>
       </DisplayCard>
     );
   };
@@ -119,9 +118,9 @@ export default function ShowButtonScreen() {
         </SearchContainer>
       </BodyPadding>
       {searchData && (
-        <DropdownSearch dataSource={arrayButtonData} searched={searchData} />
+        <Search dataSource={arrayButtonData} searched={searchData} />
       )}
-      {isShowFilter && <FilterList dataSource={arrayButtonData} />}
+      {isShowFilter && <Filter dataSource={arrayButtonData} />}
       <DisplayCard>
         <FlatList
           data={arrayButtonData}
