@@ -20,6 +20,7 @@ export default function ShowButtonScreen() {
 
   const filteredList = useSelector(selectAllFiltered);
   const dataButton = useSelector(selectAllButton);
+
   const arrayButtonData = useSelector(state => {
     const dataFiltered = dataButton.filter(item => {
       return Object.keys(item).some(key => {
@@ -54,7 +55,6 @@ export default function ShowButtonScreen() {
       });
     }
   });
-
   const handleChangeSearch = e => {
     setSearchData(e);
   };
@@ -78,6 +78,7 @@ export default function ShowButtonScreen() {
       borderRadius,
       borderColor,
       borderType,
+      isBorder,
       id,
     } = item;
     return (
@@ -91,6 +92,7 @@ export default function ShowButtonScreen() {
         borderRadius={borderRadius}
         borderColor={borderColor}
         borderType={borderType}
+        isBorder={isBorder}
         id={id}
       />
     );

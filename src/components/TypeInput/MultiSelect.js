@@ -10,10 +10,12 @@ export default function MultiSelect({
   value,
   itemsWidthHeight,
   onChangeText,
-  nameWidthHeight,
+  isDynamic,
 }) {
   const [open, setOpen] = useState(false);
-  const [valueWidthHeight, setValueWidthHeight] = useState('dynamic');
+  const [valueWidthHeight, setValueWidthHeight] = useState(
+    isDynamic || 'dynamic',
+  );
 
   return (
     <ContainerMulti>
@@ -28,7 +30,12 @@ export default function MultiSelect({
         containerStyle={styles.dropDownContainerStyle}
       />
       {valueWidthHeight === 'fixed' && (
-        <PrimaryInput children="px" value={value} onChangeText={onChangeText} />
+        <PrimaryInput
+          children="px"
+          value={value}
+          onChangeText={onChangeText}
+          // autoFocus={true}
+        />
       )}
     </ContainerMulti>
   );

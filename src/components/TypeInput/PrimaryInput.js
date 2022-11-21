@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text} from 'react-native';
-import {ContainerInput, TextInputPrimary} from './PrimaryInput.styled';
+import {Color, ContainerInput, TextInputPrimary} from './PrimaryInput.styled';
 
 export default function PrimaryInput({
   children,
@@ -10,6 +10,7 @@ export default function PrimaryInput({
   editable,
   style,
   autoFocus,
+  color,
   ...props
 }) {
   return (
@@ -23,7 +24,11 @@ export default function PrimaryInput({
         editable={editable}
         autoFocus={autoFocus}
       />
-      <Text> {children}</Text>
+      {(color || children) && (
+        <Color color={color}>
+          <Text>{children}</Text>
+        </Color>
+      )}
     </ContainerInput>
   );
 }

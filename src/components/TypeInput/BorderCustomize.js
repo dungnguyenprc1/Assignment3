@@ -27,7 +27,12 @@ export default function BorderCustomize({value, onChangeText}) {
       <Layout flex={1} flexDirection="row">
         <Layout flex={0.4}>
           <DropDownPicker
-            onChangeValue={() => handleData('isBorder', isBorder)}
+            onChangeValue={() => {
+              handleData('isBorder', isBorder);
+              // handleData('borderWidth', '3');
+              // handleData('borderRadius', '5');
+              // handleData('borderColor', '#000000');
+            }}
             dropDownDirection="TOP"
             style={styles.dropdown}
             open={openFirst}
@@ -61,6 +66,7 @@ export default function BorderCustomize({value, onChangeText}) {
             />
             <PrimaryInput
               children="px"
+              autoFocus={true}
               value={value}
               onChangeText={onChangeText}
             />

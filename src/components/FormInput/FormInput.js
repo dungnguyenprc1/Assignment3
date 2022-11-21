@@ -11,7 +11,10 @@ export default function FormInput({
   value,
   onChangeText,
   autoFocus,
+  isDynamic,
   style,
+
+  color,
 }) {
   return (
     <Container>
@@ -22,12 +25,14 @@ export default function FormInput({
           placeholder={placeholder}
           value={value}
           onChangeText={onChangeText}
-          style={style}>
+          style={style}
+          color={color}>
           {icon}
         </PrimaryInput>
       )}
       {type === 'multi' && (
         <MultiSelect
+          isDynamic={isDynamic}
           value={value}
           onChangeText={onChangeText}
           children="px"

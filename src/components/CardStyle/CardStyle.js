@@ -1,7 +1,11 @@
 import React from 'react';
-import {Text} from 'react-native';
 import ButtonCustomize from '../../Button/ButtonCustomize';
-import {ButtonView, Container, ContentView} from './CardStyle.styled';
+import {
+  ButtonView,
+  Container,
+  ContentView,
+  TextPadding,
+} from './CardStyle.styled';
 
 export default function CardStyle({
   id,
@@ -14,16 +18,18 @@ export default function CardStyle({
   borderRadius,
   borderColor,
   borderType,
+  isBorder,
 }) {
   return (
     <Container>
       <ButtonView>
         <ButtonCustomize
+          isBorder={isBorder}
           title={title}
           textColor={textColor}
-          height={height}
+          buttonHeight={height}
           backgroundColor={backgroundColor}
-          width={width}
+          buttonWidth={width}
           borderColor={borderColor}
           borderWidth={borderWidth}
           borderRadius={borderRadius}
@@ -31,8 +37,8 @@ export default function CardStyle({
         />
       </ButtonView>
       <ContentView>
-        <Text>ID: {id}</Text>
-        <Text>Name: {title}</Text>
+        <TextPadding>ID: {id}</TextPadding>
+        <TextPadding>Name: {title}</TextPadding>
       </ContentView>
     </Container>
   );

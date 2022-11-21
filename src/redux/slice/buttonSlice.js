@@ -1,7 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
+  text: 'I am a button',
   isBorder: 'false',
+  textColor: '#FFF',
+  backgroundColor: '#CB2E2E',
+  buttonHeight: '56',
+  borderType: 'solid',
+  borderColor: '#000000',
 };
 
 const buttonSlice = createSlice({
@@ -12,9 +18,12 @@ const buttonSlice = createSlice({
       const {name, values} = payload;
       state[name] = values;
     },
+    handleReset: () => {
+      return initialState;
+    },
   },
 });
-export const {SET_BUTTON} = buttonSlice.actions;
+export const {SET_BUTTON, handleReset} = buttonSlice.actions;
 
 export const getInitialButton = state => state.button;
 

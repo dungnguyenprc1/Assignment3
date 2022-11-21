@@ -1,16 +1,13 @@
 import React from 'react';
 import {ScrollView, TouchableOpacity, View} from 'react-native';
-import Fontisto from 'react-native-vector-icons/Fontisto';
 import {useDispatch, useSelector} from 'react-redux';
 import ButtonCustomize from '../Button/ButtonCustomize';
 import FlatListCard from '../components/FlatListCard/FlatListCard';
 import FormInput from '../components/FormInput/FormInput';
-import {lowerLetter} from '../helper';
 import useOrientation from '../hooks/useOrientation';
-import {SET_BUTTON} from '../redux/slice/buttonSlice';
+import {getInitialButton, SET_BUTTON} from '../redux/slice/buttonSlice';
 import {ADD_LISTS} from '../redux/slice/listsSlice';
 import {
-  BorderIcon,
   Container,
   FooterContainer,
   Header,
@@ -22,7 +19,7 @@ import {
 
 export default function SettingButtonScreen() {
   const dispatch = useDispatch();
-  const propertyButton = useSelector(state => state.button);
+  const propertyButton = useSelector(getInitialButton);
 
   const {
     text,
@@ -34,17 +31,18 @@ export default function SettingButtonScreen() {
     borderRadius,
     borderType,
     borderWidth,
+    isBorder,
+    dashedGap,
   } = propertyButton;
   const orientation = useOrientation();
   const {isPortrait} = orientation;
-
   const handleValue = (name, values) => {
     dispatch(SET_BUTTON({name, values}));
   };
 
   const handleAddList = () => {
     dispatch(ADD_LISTS(propertyButton));
-
+    // dispatch(handleReset());
     // eslint-disable-next-line no-alert
     alert('The button have been added to list');
   };
@@ -78,43 +76,19 @@ export default function SettingButtonScreen() {
               />
               <FormInput
                 value={textColor}
+                color={textColor}
                 onChangeText={value => handleValue('textColor', value)}
-                placeholder="#CB2E2E"
+                placeholder="#FFF"
                 name="Button text color"
                 type="primary"
-                icon={
-                  lowerLetter(textColor) === '#fff' ? (
-                    <BorderIcon>
-                      <Fontisto name="rectangle" size={14} color="#fff" />
-                    </BorderIcon>
-                  ) : (
-                    <Fontisto
-                      name="rectangle"
-                      size={18}
-                      color={lowerLetter(textColor) || '#CB2E2E'}
-                    />
-                  )
-                }
               />
               <FormInput
                 value={backgroundColor}
                 onChangeText={value => handleValue('backgroundColor', value)}
                 placeholder="#CB2E2E"
+                color={backgroundColor}
                 name="Background color"
                 type="primary"
-                icon={
-                  lowerLetter(backgroundColor) === '#fff' ? (
-                    <BorderIcon>
-                      <Fontisto name="rectangle" size={14} color="#fff" />
-                    </BorderIcon>
-                  ) : (
-                    <Fontisto
-                      name="rectangle"
-                      size={18}
-                      color={lowerLetter(backgroundColor) || '#CB2E2E'}
-                    />
-                  )
-                }
               />
               <FormInput
                 name="Button Width"
@@ -126,6 +100,7 @@ export default function SettingButtonScreen() {
               />
               <FormInput
                 name="Button Height"
+                isDynamic="fixed"
                 type="multi"
                 autoFocus={true}
                 value={buttonHeight}
@@ -140,48 +115,33 @@ export default function SettingButtonScreen() {
               />
               {borderType === 'dashed' && (
                 <FormInput
-                  // value={borderWidth}
-                  // onChangeText={value => handleValue('borderWidth', value)}
+                  value={dashedGap}
+                  onChangeText={value => handleValue('dashedGap', value)}
+                  autoFocus={true}
                   name="Border Dash pattern"
                   type="primary"
                 />
               )}
-
               <FormInput
                 value={borderRadius}
                 onChangeText={value => handleValue('borderRadius', value)}
                 placeholder="Radius"
                 name="Border Radius"
                 type="primary"
+                icon="px"
               />
-
               <FormInput
                 value={borderColor}
+                color={borderColor}
                 onChangeText={value => handleValue('borderColor', value)}
                 placeholder="#000000"
                 name="Border Color"
                 type="primary"
-                icon={
-                  lowerLetter(borderColor) === '#fff' ? (
-                    <BorderIcon>
-                      <Fontisto name="rectangle" size={14} color="#fff" />
-                    </BorderIcon>
-                  ) : (
-                    <Fontisto
-                      name="rectangle"
-                      size={18}
-                      color={lowerLetter(borderColor) || '#000000'}
-                    />
-                  )
-                }
               />
             </View>
           </ScrollView>
         ) : (
-          <View>
-            {/* <Text>123</Text> */}
-            <FlatListCard />
-          </View>
+          <FlatListCard />
         )}
       </Layout>
 
@@ -191,13 +151,14 @@ export default function SettingButtonScreen() {
           <ButtonCustomize
             title={text}
             textColor={textColor}
+            buttonHeight={buttonHeight}
             backgroundColor={backgroundColor}
-            width={buttonWidth}
-            height={buttonHeight}
+            buttonWidth={buttonWidth}
+            borderColor={borderColor}
             borderWidth={borderWidth}
             borderRadius={borderRadius}
-            borderColor={borderColor}
             borderType={borderType}
+            isBorder={isBorder}
           />
         </ScrollView>
       </FooterContainer>

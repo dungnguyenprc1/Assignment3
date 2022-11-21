@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import {lowerLetter} from '../../helper';
 
 export const ContainerInput = styled.View`
   flex: 1;
@@ -42,4 +43,12 @@ export const Border = styled.View`
 export const Layout = styled.View`
   flex: ${props => props.flex};
   flex-direction: ${props => props.flexDirection || 'column'}; ;
+`;
+
+export const Color = styled.View`
+  width: 18px;
+  height: 18px;
+  background-color: ${({color}) => color || '#fff'};
+  border-width: ${({color}) =>
+    lowerLetter(color) === '#fff' ? '2px' : '0px'}; ;
 `;
