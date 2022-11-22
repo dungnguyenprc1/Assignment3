@@ -16,6 +16,7 @@ const buttonSlice = createSlice({
   reducers: {
     SET_BUTTON: (state, {payload}) => {
       const {name, values} = payload;
+      console.log('payload', payload);
       state[name] = values;
     },
     handleReset: () => {
